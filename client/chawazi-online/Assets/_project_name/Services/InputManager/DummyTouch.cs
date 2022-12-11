@@ -8,8 +8,8 @@ using VContainer;
 public class DummyTouch : MonoBehaviour
 {
     private InputManager inputManager;
-   private ILogger logger;
-    
+    private ILogger logger;
+
     [Inject]
     public void Construct(ILogger logger, InputManager inputManager)
     {
