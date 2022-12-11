@@ -5,13 +5,12 @@ using VContainer.Unity;
 
 public class GameLifetimeScope : LifetimeScope
 {
-    [SerializeField] private HelloScreen helloScreen;
+    [SerializeField] private InputManager inputManager;
 
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.Register<HelloWorldService>(Lifetime.Singleton);
+        builder.RegisterComponent(inputManager);
+        builder.RegisterComponentInHierarchy<DummyTouch>();
         builder.Register<DefaultUnityLogger>(Lifetime.Singleton).AsImplementedInterfaces();
-        builder.RegisterEntryPoint<ServiceUser>();
-        builder.RegisterComponent(helloScreen);
     }
 }

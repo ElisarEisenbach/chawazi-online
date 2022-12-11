@@ -8,95 +8,95 @@ using VContainer;
 
 public class DefaultUnityLogger : ILogger
 {
-    private ILogger unityDefaultDebuger = Debug.unityLogger;
+    private readonly ILogger unityDefaultDebugger;
 
     [Inject]
     public DefaultUnityLogger()
     {
-
+        unityDefaultDebugger = Debug.unityLogger;
     }
 
-    public ILogHandler logHandler { get => unityDefaultDebuger.logHandler; set => unityDefaultDebuger.logHandler = value; }
-    public bool logEnabled { get => unityDefaultDebuger.logEnabled; set => unityDefaultDebuger.logEnabled = value; }
-    public LogType filterLogType { get => unityDefaultDebuger.filterLogType; set => unityDefaultDebuger.filterLogType = value; }
+    public ILogHandler logHandler { get => unityDefaultDebugger.logHandler; set => unityDefaultDebugger.logHandler = value; }
+    public bool logEnabled { get => unityDefaultDebugger.logEnabled; set => unityDefaultDebugger.logEnabled = value; }
+    public LogType filterLogType { get => unityDefaultDebugger.filterLogType; set => unityDefaultDebugger.filterLogType = value; }
 
     public bool IsLogTypeAllowed(LogType logType)
     {
-        return unityDefaultDebuger.IsLogTypeAllowed(logType);
+        return unityDefaultDebugger.IsLogTypeAllowed(logType);
     }
 
     public void Log(LogType logType, object message)
     {
-        unityDefaultDebuger.Log(logType, message);
+        unityDefaultDebugger.Log(logType, message);
     }
 
     public void Log(LogType logType, object message, UnityEngine.Object context)
     {
-        unityDefaultDebuger.Log(logType, message, context);
+        unityDefaultDebugger.Log(logType, message, context);
     }
 
     public void Log(LogType logType, string tag, object message)
     {
-        unityDefaultDebuger.Log(logType, tag, message);
+        unityDefaultDebugger.Log(logType, tag, message);
     }
 
     public void Log(LogType logType, string tag, object message, UnityEngine.Object context)
     {
-        unityDefaultDebuger.Log(logType, tag, message, context);
+        unityDefaultDebugger.Log(logType, tag, message, context);
     }
 
     public void Log(object message)
     {
-        unityDefaultDebuger.Log(message);
+        unityDefaultDebugger.Log(message);
     }
 
     public void Log(string tag, object message)
     {
-        unityDefaultDebuger.Log(tag, message);
+        unityDefaultDebugger.Log(tag, message);
     }
 
     public void Log(string tag, object message, UnityEngine.Object context)
     {
-        unityDefaultDebuger.Log(tag, message, context);
+        unityDefaultDebugger.Log(tag, message, context);
     }
 
     public void LogError(string tag, object message)
     {
-        unityDefaultDebuger.LogError(tag, message);
+        unityDefaultDebugger.LogError(tag, message);
     }
 
     public void LogError(string tag, object message, UnityEngine.Object context)
     {
-        unityDefaultDebuger.LogError(tag, message, context);
+        unityDefaultDebugger.LogError(tag, message, context);
     }
 
     public void LogException(Exception exception)
     {
-        unityDefaultDebuger.LogException(exception);
+        unityDefaultDebugger.LogException(exception);
     }
 
     public void LogException(Exception exception, UnityEngine.Object context)
     {
-        unityDefaultDebuger.LogException(exception, context);
+        unityDefaultDebugger.LogException(exception, context);
     }
 
     public void LogFormat(LogType logType, string format, params object[] args)
     {
-        unityDefaultDebuger.LogFormat(logType, format, args);
+        unityDefaultDebugger.LogFormat(logType, format, args);
     }
 
     public void LogFormat(LogType logType, UnityEngine.Object context, string format, params object[] args)
     {
-        unityDefaultDebuger.LogFormat(logType, context, format, args);
+        unityDefaultDebugger.LogFormat(logType, context, format, args);
     }
 
     public void LogWarning(string tag, object message)
     {
-        unityDefaultDebuger.LogWarning(tag, message);
+        unityDefaultDebugger.LogWarning(tag, message);
     }
 
     public void LogWarning(string tag, object message, UnityEngine.Object context)
     {
-        unityDefaultDebuger.LogWarning(tag, message, context);
+        unityDefaultDebugger.LogWarning(tag, message, context);
     }
 }

@@ -219,7 +219,6 @@ GameObject:
   - component: {fileID: 1352374197}
   - component: {fileID: 1352374196}
   - component: {fileID: 1352374200}
-  - component: {fileID: 1352374201}
   - component: {fileID: 1352374203}
   m_Layer: 0
   m_Name: Cube
@@ -316,18 +315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda62b66f1ae1ca46a687a33dd04410f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1352374201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1352374195}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f9baddc0b19da241bb8e7c34a3fff58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1352374203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,6 +338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1979509372}
   - component: {fileID: 1979509371}
+  - component: {fileID: 1979509373}
   m_Layer: 0
   m_Name: manager
   m_TagString: Untagged
@@ -384,3 +372,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1979509373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979509370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698385495301c5540a60bc9ba36c7230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
+  dummyTouch: {fileID: 1352374203}
