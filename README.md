@@ -1,3 +1,3 @@
 # chawazi-online
 
-## ITS CHAWAZI, JUST ONLINE!
+## ITS LIKE CHAWAZI, JUST ONLINE!
