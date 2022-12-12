@@ -12,7 +12,7 @@ public class GameLifetimeScope : LifetimeScope
     {
         builder.RegisterComponent(inputManager);
         builder.Register<DefaultUnityLogger>(Lifetime.Singleton).AsImplementedInterfaces();
-        builder.RegisterComponentInHierarchy<DummyTouch>();
-        builder.RegisterComponentInNewPrefab(prefab, Lifetime.Scoped);
+      //  builder.RegisterComponentInHierarchy<DummyTouch>();
+       // builder.RegisterComponentInNewPrefab(prefab, Lifetime.Scoped);
     }
 }
