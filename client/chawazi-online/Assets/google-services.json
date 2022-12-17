@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "189663390078",
+    "project_id": "chawazi-online-43354",
+    "storage_bucket": "chawazi-online-43354.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189663390078:android:ff055196d31edac6196b2f",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.chawazionline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189663390078-3k9kjhs0v475ui6rf7peq0p57bms61ae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoqP2HtR_Wfm1M5CNlt4CvfZqqADwF58Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189663390078-3k9kjhs0v475ui6rf7peq0p57bms61ae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
