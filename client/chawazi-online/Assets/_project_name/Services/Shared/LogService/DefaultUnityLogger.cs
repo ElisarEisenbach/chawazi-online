@@ -3,14 +3,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using VContainer;
 
 
 public class DefaultUnityLogger : ILogger
 {
     private readonly ILogger unityDefaultDebugger;
-
-    [Inject]
+    
     public DefaultUnityLogger()
     {
         unityDefaultDebugger = Debug.unityLogger;

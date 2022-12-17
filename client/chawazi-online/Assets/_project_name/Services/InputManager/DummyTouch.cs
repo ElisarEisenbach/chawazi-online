@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
-using VContainer;
+
 
 public class DummyTouch : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class DummyTouch : MonoBehaviour
 
     public int touchId;
 
-    [Inject]
+
     public void Construct(ILogger logger, InputManager inputManager)
     {
         this.logger = logger;
