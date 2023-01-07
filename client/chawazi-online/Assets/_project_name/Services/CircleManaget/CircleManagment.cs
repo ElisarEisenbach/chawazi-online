@@ -4,26 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
+using Zenject;
 
 
-public class DummyTouch : MonoBehaviour
+public class CircleManagment : MonoBehaviour
 {
-   [SerializeField] private InputManager inputManager;
-  private ILogger logger;
+    [SerializeField] private InputManager inputManager;
 
     public int touchId;
 
 
-    public void Construct(ILogger logger, InputManager inputManager)
-    {
-        this.logger = logger;
-        this.inputManager = inputManager;
-    }
+    // [Inject]
+    // public void Construct(ILogger logger)
+    // {
+    //     this.logger = logger;
+    // }
 
     private void OnEnable()
     {
-        //todelete 
-        inputManager = GameObject.Find("manager").GetComponent<InputManager>();
+        inputManager = GameObject.Find("manager").GetComponent<InputManager>(); //todo: move to DI
         touchId = 0;
         inputManager.OnStartTouch += InputManager_OnStartTouch;
         inputManager.OnEndTouch += InputManager_OnEndTouch;
@@ -32,7 +31,6 @@ public class DummyTouch : MonoBehaviour
 
     private void InputManager_OnMovingTouch(object sender, TouchEventArgs args)
     {
-        
         if (touchId != args.Finger.currentTouch.touchId)
             return;
         //Debug.Log("Moving?");
@@ -59,9 +57,11 @@ public class DummyTouch : MonoBehaviour
         {
             touchId = args.Finger.currentTouch.touchId;
         }
+
         if (touchId != args.Finger.currentTouch.touchId)
             return;
-        
+
+        gameObject.name = args.Finger.currentTouch.touchId.ToString();
         Debug.Log("started touch " + touchId);
         GetComponent<Renderer>().enabled = true;
         var worldCoordinates = args.GetWorldCoordinates();
