@@ -11,7 +11,7 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public delegate void TouchEvent(object sender, TouchEventArgs args);
 
-
+//todo create interface
 public class InputManager : MonoBehaviour
 {
     private ILogger logger;
@@ -36,28 +36,31 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         EnhancedTouchSupport.Disable();
+        Touch.onFingerDown -= TouchOnFingerDown;
+        Touch.onFingerMove -= TouchOnFingerMove;
+        Touch.onFingerUp -= TouchOnFingerUp;
     }
 
     private void Start()
     {
-        Touch.onFingerDown += TouchOnonFingerDown;
-        Touch.onFingerMove += TouchOnonFingerMove;
-        Touch.onFingerUp += TouchOnonFingerUp;
+        Touch.onFingerDown += TouchOnFingerDown;
+        Touch.onFingerMove += TouchOnFingerMove;
+        Touch.onFingerUp += TouchOnFingerUp;
     }
 
-    private void TouchOnonFingerMove(Finger finger)
+    private void TouchOnFingerMove(Finger finger)
     {
         OnMovingTouch?.Invoke(this, new TouchEventArgs(finger));
     }
 
-    private void TouchOnonFingerUp(Finger finger)
+    private void TouchOnFingerUp(Finger finger)
     {
         OnEndTouch?.Invoke(this, new TouchEventArgs(finger));
     }
 
-    private void TouchOnonFingerDown(Finger finger)
+    private void TouchOnFingerDown(Finger finger)
     {
-        Instantiate(cube);//factory
+        //Instantiate(cube);//factory
         OnStartTouch?.Invoke(this, new TouchEventArgs(finger));
         logger.Log("DI is working");
     }
