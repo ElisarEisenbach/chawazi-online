@@ -4,7 +4,8 @@ using Zenject;
 public class ChawaziOnlineInstaller : MonoInstaller
 {
     public GameObject CirclePrefab;
-    
+
+
     public override void InstallBindings()
     {
         Container.Bind<CircleSpawner>().AsSingle().NonLazy();
