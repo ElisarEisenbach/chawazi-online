@@ -1,32 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Zenject;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
-
 public delegate void TouchEvent(object sender, TouchEventArgs args);
 
-
+//todo create interface
 public class InputManager : MonoBehaviour
 {
+    public GameObject cube; //todo:
     private ILogger logger;
 
-    [Inject]
-    public void Constructor(ILogger logger)
+    private void Start()
     {
-        this.logger = logger;
+        Touch.onFingerDown += TouchOnFingerDown;
+        Touch.onFingerMove += TouchOnFingerMove;
+        Touch.onFingerUp += TouchOnFingerUp;
     }
-    
-    public GameObject cube; //todo:
-    
-    public event TouchEvent OnStartTouch;
-    public event TouchEvent OnEndTouch;
-    public event TouchEvent OnMovingTouch;
 
     private void OnEnable()
     {
@@ -36,28 +26,34 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         EnhancedTouchSupport.Disable();
+        Touch.onFingerDown -= TouchOnFingerDown;
+        Touch.onFingerMove -= TouchOnFingerMove;
+        Touch.onFingerUp -= TouchOnFingerUp;
     }
 
-    private void Start()
+    [Inject]
+    public void Constructor(ILogger logger)
     {
-        Touch.onFingerDown += TouchOnonFingerDown;
-        Touch.onFingerMove += TouchOnonFingerMove;
-        Touch.onFingerUp += TouchOnonFingerUp;
+        this.logger = logger;
     }
 
-    private void TouchOnonFingerMove(Finger finger)
+    public event TouchEvent OnStartTouch;
+    public event TouchEvent OnEndTouch;
+    public event TouchEvent OnMovingTouch;
+
+    private void TouchOnFingerMove(Finger finger)
     {
         OnMovingTouch?.Invoke(this, new TouchEventArgs(finger));
     }
 
-    private void TouchOnonFingerUp(Finger finger)
+    private void TouchOnFingerUp(Finger finger)
     {
         OnEndTouch?.Invoke(this, new TouchEventArgs(finger));
     }
 
-    private void TouchOnonFingerDown(Finger finger)
+    private void TouchOnFingerDown(Finger finger)
     {
-        Instantiate(cube);//factory
+        //Instantiate(cube);//factory
         OnStartTouch?.Invoke(this, new TouchEventArgs(finger));
         logger.Log("DI is working");
     }

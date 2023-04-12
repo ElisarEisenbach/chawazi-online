@@ -1,24 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
-using Zenject;
 
-
+[Obsolete]
 public class CircleManagment : MonoBehaviour
 {
     [SerializeField] private InputManager inputManager;
 
     public int touchId;
-
-
-    // [Inject]
-    // public void Construct(ILogger logger)
-    // {
-    //     this.logger = logger;
-    // }
 
     private void OnEnable()
     {
