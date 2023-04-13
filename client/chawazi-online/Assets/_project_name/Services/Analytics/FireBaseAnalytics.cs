@@ -1,4 +1,3 @@
-using _project_name.Services.Analytics;
 using Firebase;
 using UnityEngine;
 

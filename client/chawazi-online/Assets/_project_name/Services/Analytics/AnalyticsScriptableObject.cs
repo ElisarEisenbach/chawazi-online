@@ -1,10 +1,7 @@
 using UnityEngine;
 
-namespace _project_name.Services.Analytics
+[CreateAssetMenu(fileName = "analytics_enabled", menuName = "Analytics", order = 0)]
+public class AnalyticsScriptableObject : ScriptableObject
 {
-    [CreateAssetMenu(fileName = "analytics_enabled", menuName = "Analytics", order = 0)]
-    public class AnalyticsScriptableObject : ScriptableObject
-    {
-        public bool isEnabled = true;
-    }
+    public bool isEnabled = true;
 }

@@ -55,6 +55,5 @@ public class InputManager : MonoBehaviour
     {
         //Instantiate(cube);//factory
         OnStartTouch?.Invoke(this, new TouchEventArgs(finger));
-        logger.Log("DI is working");
     }
 }
