@@ -1,4 +1,3 @@
-using _project_name.Services.CircleManagment;
 using UnityEngine;
 using Zenject;
 
@@ -10,11 +9,11 @@ public class ChawaziOnlineInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        Container.Bind<ChooseWinner>().AsSingle().NonLazy();
         Container.Bind<AnalyticsScriptableObject>().FromInstance(AnalyticsScriptableObject);
         Container.Bind<FireBaseAnalytics>().AsSingle().NonLazy();
         Container.Bind<CircleSpawner>().AsSingle().NonLazy();
         Container.BindFactory<Circle, CircleFactory>().FromComponentInNewPrefab(CirclePrefab);
         Container.Bind<ILogger>().FromInstance(Debug.unityLogger);
-        Container.Bind<ChooseWinner>().AsSingle().NonLazy();
     }
 }

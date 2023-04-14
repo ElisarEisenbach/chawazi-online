@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.InputSystem.EnhancedTouch;
 
-internal class WinnerEventArgs : EventArgs
+public class WinnerEventArgs : EventArgs
 {
     public readonly Finger winningFinger;
 

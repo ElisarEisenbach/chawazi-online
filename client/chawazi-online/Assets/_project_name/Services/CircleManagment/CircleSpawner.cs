@@ -10,7 +10,6 @@ public class CircleSpawner
         this.circleFactory = circleFactory;
         inputManager.OnStartTouch += CreateCircle;
         this.logger = logger;
-        logger.Log("here??");
     }
 
     private void CreateCircle(object sender, TouchEventArgs args)
