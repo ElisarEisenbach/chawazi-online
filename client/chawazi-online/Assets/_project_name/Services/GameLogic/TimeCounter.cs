@@ -31,25 +31,31 @@ namespace _project_name.Services.GameLogic
                     logger.Log("Count: " + count);
                     count++;
                     Thread.Sleep(1000);
-                    if (count == 10)
+                    if (count == 3)
                     {
                         logger.Log("Time's up!");
-                        CancelTimer();
                         EndRound?.Invoke(this, new EventArgs());
+                        CancelTimer();
                     }
                 }
             });
 
             // Listen for the TouchEvent and reset the count
-            inputManager.OnStartTouch += HandleTouchEvent;
-            inputManager.OnMovingTouch += HandleTouchEvent;
+            inputManager.OnStartTouch += OnNeedToCancelTimer;
+            inputManager.OnMovingTouch += OnNeedToCancelTimer;
+        }
+
+        private void OnDisable()
+        {
+            CancelTimer();
         }
 
         private void OnDestroy()
         {
             // Unsubscribe from the TouchEvent
-            inputManager.OnStartTouch -= HandleTouchEvent;
-            inputManager.OnMovingTouch -= HandleTouchEvent;
+            inputManager.OnStartTouch -= OnNeedToCancelTimer;
+            inputManager.OnMovingTouch -= OnNeedToCancelTimer;
+            CancelTimer();
         }
 
         public event ShouldEndRound EndRound;
@@ -61,9 +67,13 @@ namespace _project_name.Services.GameLogic
             this.logger = logger;
         }
 
-        private void HandleTouchEvent(object sender, TouchEventArgs args)
+        private void OnNeedToCancelTimer(object sender, TouchEventArgs args)
         {
             CancelTimer();
+        }
+
+        private void OnNeedToStartTimer()
+        {
         }
 
         private void CancelTimer()
