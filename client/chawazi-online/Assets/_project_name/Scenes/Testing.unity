@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 1979509372}
   - component: {fileID: 1979509371}
   - component: {fileID: 1979509373}
+  - component: {fileID: 1979509374}
   m_Layer: 0
   m_Name: manager
   m_TagString: Untagged
@@ -280,10 +281,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _components:
   - {fileID: 1979509371}
+  - {fileID: 1979509374}
   _identifier: 
   _useSceneContext: 0
   _context: {fileID: 0}
   _bindType: 0
+--- !u!114 &1979509374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979509370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f4a0068b1c44e749bea0db7fca6b5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2088630655
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,3 +376,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CirclePrefab: {fileID: 8695855056367686474, guid: f50ff76a638c5ec408ebe43e298b7ec9, type: 3}
+  AnalyticsScriptableObject: {fileID: 11400000, guid: 8e66df7b2e1222044b927fcf828260cc, type: 2}
