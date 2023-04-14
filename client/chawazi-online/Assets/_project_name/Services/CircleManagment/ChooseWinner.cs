@@ -12,20 +12,16 @@ namespace _project_name.Services.CircleManagment
     {
         public delegate void WinnerChoosen(object sender, EventArgs args);
 
-        private InputManager inputManager;
+        // think: move list to scriptableObject that can be trace from other places too
+        private readonly List<Finger> playingFingers = new();
 
-        private List<Finger>
-            playingFingers; // think: move list to scriptableObject that can be trace from other places too
+        private InputManager inputManager;
 
         public ChooseWinner(InputManager inputManager, TimeCounter timeCounter)
         {
             Debug.Log("Initialized");
             timeCounter.EndRound += OnRoundEnded;
-            inputManager.OnStartTouch += (sender, args) =>
-            {
-                Debug.Log("Hey!! added!");
-                playingFingers.Add(args.Finger);
-            };
+            inputManager.OnStartTouch += (sender, args) => { playingFingers.Add(args.Finger); };
             inputManager.OnEndTouch += (sender, args) =>
             {
                 var fingerToRemove = playingFingers.FirstOrDefault(f => f.index == args.Finger.index);
@@ -36,8 +32,7 @@ namespace _project_name.Services.CircleManagment
         private void OnRoundEnded(object sender, EventArgs args)
         {
             var choosenPlayer = ChooseRandomWinner();
-            Debug.Log("raised");
-            WinnerHasBeenChoosen?.Invoke(this, new EventArgs()); // todo: add right eventsArg class
+            WinnerHasBeenChoosen?.Invoke(this, new WinnerEventArgs(choosenPlayer));
         }
 
         public event WinnerChoosen WinnerHasBeenChoosen;
