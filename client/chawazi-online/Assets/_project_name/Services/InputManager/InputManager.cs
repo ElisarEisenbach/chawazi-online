@@ -25,10 +25,10 @@ public class InputManager : MonoBehaviour
 
     private void OnDisable()
     {
-        EnhancedTouchSupport.Disable();
         Touch.onFingerDown -= TouchOnFingerDown;
         Touch.onFingerMove -= TouchOnFingerMove;
         Touch.onFingerUp -= TouchOnFingerUp;
+        EnhancedTouchSupport.Disable();
     }
 
     [Inject]
@@ -43,6 +43,7 @@ public class InputManager : MonoBehaviour
 
     private void TouchOnFingerMove(Finger finger)
     {
+        logger.Log("movving");
         OnMovingTouch?.Invoke(this, new TouchEventArgs(finger));
     }
 

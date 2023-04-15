@@ -377,3 +377,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CirclePrefab: {fileID: 8695855056367686474, guid: f50ff76a638c5ec408ebe43e298b7ec9, type: 3}
   AnalyticsScriptableObject: {fileID: 11400000, guid: 8e66df7b2e1222044b927fcf828260cc, type: 2}
+  FingerList: {fileID: 11400000, guid: 073e4c8a66318e048b92833cc1f10e1e, type: 2}
