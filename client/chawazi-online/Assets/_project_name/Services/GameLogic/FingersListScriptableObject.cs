@@ -16,16 +16,19 @@ public class FingersListScriptableObject : ScriptableObject
     {
         inputManager.OnStartTouch += InputManager_OnOnStartTouch;
         inputManager.OnEndTouch += InputManager_OnOnEndTouch;
+        CircleDestroyerHelper.OnDestroyCircle += CircleDestroyerHelper_OnOnDestroyCircle;
+    }
+
+    private void CircleDestroyerHelper_OnOnDestroyCircle(Circle destroyedCircle)
+    {
+        var fingerIdToRemove = destroyedCircle.touchId;
+        RemoveFinger(fingerIdToRemove);
     }
 
     private void InputManager_OnOnEndTouch(object sender, TouchEventArgs args)
     {
-        var fingerToRemove =
-            PlayingFingers.FirstOrDefault(f => f.currentTouch.touchId == args.Finger.currentTouch.touchId);
-        if (fingerToRemove != null) PlayingFingers.Remove(fingerToRemove);
-        OnFingersCountChanged?.Invoke(this,
-            new FingersCountChangeEventArgs(PlayingFingers.Count, args.Finger.currentTouch.touchId,
-                FingersCountChangeEventArgs.ChangeType.Removed));
+        var fingerIdToRemove = args.Finger.currentTouch.touchId;
+        RemoveFinger(fingerIdToRemove);
     }
 
     private void InputManager_OnOnStartTouch(object sender, TouchEventArgs args)
@@ -35,24 +38,17 @@ public class FingersListScriptableObject : ScriptableObject
             new FingersCountChangeEventArgs(PlayingFingers.Count, args.Finger.currentTouch.touchId,
                 FingersCountChangeEventArgs.ChangeType.Added));
     }
-}
 
-public class FingersCountChangeEventArgs : EventArgs
-{
-    public enum ChangeType
+
+    private void RemoveFinger(int id)
     {
-        Added,
-        Removed
-    }
-
-    public readonly int fingersCount;
-    public readonly int id;
-    public ChangeType CurrentFingerChangeType;
-
-    public FingersCountChangeEventArgs(int fingersCount, int id, ChangeType changeType)
-    {
-        CurrentFingerChangeType = changeType;
-        this.fingersCount = fingersCount;
-        this.id = id;
+        var fingerToRemove = PlayingFingers.FirstOrDefault(f => f.currentTouch.touchId == id);
+        if (fingerToRemove != null)
+        {
+            PlayingFingers.Remove(fingerToRemove);
+            OnFingersCountChanged?.Invoke(this,
+                new FingersCountChangeEventArgs(PlayingFingers.Count, id,
+                    FingersCountChangeEventArgs.ChangeType.Removed));
+        }
     }
 }

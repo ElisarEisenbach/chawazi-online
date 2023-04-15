@@ -33,15 +33,9 @@ public class Circle : MonoBehaviour
     {
         // todo: add animations
         if (touchId != args.winningFinger.currentTouch.touchId)
-        {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-            logger.Log("looser!");
-        }
+            this.DestroyCircle();
         else
-        {
             logger.Log("Winner!");
-        }
     }
 
 
