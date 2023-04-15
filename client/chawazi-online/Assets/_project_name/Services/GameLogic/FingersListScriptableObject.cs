@@ -25,33 +25,34 @@ public class FingersListScriptableObject : ScriptableObject
         if (fingerToRemove != null) PlayingFingers.Remove(fingerToRemove);
         OnFingersCountChanged?.Invoke(this,
             new FingersCountChangeEventArgs(PlayingFingers.Count, args.Finger.currentTouch.touchId,
-                ChangeType.Removed));
+                FingersCountChangeEventArgs.ChangeType.Removed));
     }
 
     private void InputManager_OnOnStartTouch(object sender, TouchEventArgs args)
     {
         PlayingFingers.Add(args.Finger);
         OnFingersCountChanged?.Invoke(this,
-            new FingersCountChangeEventArgs(PlayingFingers.Count, args.Finger.currentTouch.touchId, ChangeType.Added));
+            new FingersCountChangeEventArgs(PlayingFingers.Count, args.Finger.currentTouch.touchId,
+                FingersCountChangeEventArgs.ChangeType.Added));
     }
 }
 
 public class FingersCountChangeEventArgs : EventArgs
 {
+    public enum ChangeType
+    {
+        Added,
+        Removed
+    }
+
     public readonly int fingersCount;
     public readonly int id;
-    public ChangeType ChangeType;
+    public ChangeType CurrentFingerChangeType;
 
     public FingersCountChangeEventArgs(int fingersCount, int id, ChangeType changeType)
     {
-        ChangeType = changeType;
+        CurrentFingerChangeType = changeType;
         this.fingersCount = fingersCount;
         this.id = id;
     }
-}
-
-public enum ChangeType
-{
-    Added,
-    Removed
 }
