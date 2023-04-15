@@ -22,9 +22,4 @@ public class ChawaziOnlineInstaller : MonoInstaller
         Container.BindFactory<Circle, CircleFactory>().FromComponentInNewPrefab(CirclePrefab);
         Container.Bind<ILogger>().FromInstance(Debug.unityLogger);
     }
-
-    private FingersListScriptableObject CreateFingerScriptableObject()
-    {
-        return ScriptableObject.CreateInstance<FingersListScriptableObject>();
-    }
 }
