@@ -6,19 +6,22 @@ namespace _project_name.Services.Analytics
 {
     public class InitializeAnalytics : MonoBehaviour
     {
-        private List<IAnalytics> analytics;
+        private readonly List<IAnalytics> analytics = new();
         private bool initialize;
+        private ILogger logger;
 
         private void Start()
         {
-            if (initialize)
+            analytics.Add(new FireBaseAnalytics(logger));
+            if (initialize && analytics.Count > 0)
                 foreach (var analytic in analytics)
                     analytic.InitializeAnalytics();
         }
 
         [Inject]
-        public void Constructor(SettingsScriptableObject settings)
+        public void Constructor(SettingsScriptableObject settings, ILogger logger)
         {
+            this.logger = logger;
             initialize = settings.isAnalyticsEnabled;
         }
     }
