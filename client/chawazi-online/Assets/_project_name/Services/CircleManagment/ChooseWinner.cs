@@ -36,9 +36,8 @@ public class ChooseWinner
 
     private void OnRoundEnded(object sender, EventArgs args)
     {
-        logger.Log(fingersListScriptableObject.PlayingFingers.Count + "ok so far works");
         var choosenPlayer = ChooseRandomWinner(fingersListScriptableObject.PlayingFingers);
-        logger.Log("winning player is: " + choosenPlayer.index);
+        logger.Log("winning player is: " + choosenPlayer.currentTouch.touchId);
         WinnerHasBeenChoosen?.Invoke(this, new WinnerEventArgs(choosenPlayer));
     }
 

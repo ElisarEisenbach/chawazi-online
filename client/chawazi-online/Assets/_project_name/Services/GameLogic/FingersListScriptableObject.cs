@@ -7,7 +7,7 @@ using Zenject;
 [CreateAssetMenu(fileName = "FingersList", menuName = "GameLogics", order = 0)]
 public class FingersListScriptableObject : ScriptableObject
 {
-    public List<int> Ids = new();
+    public List<int> Ids = new(); //just for debug
     public List<Finger> PlayingFingers = new();
 
     [Inject]
@@ -17,7 +17,7 @@ public class FingersListScriptableObject : ScriptableObject
         {
             PlayingFingers.Add(args.Finger);
             Ids.Add(args.Finger.currentTouch.touchId);
-            getIds();
+            //getIds();
         };
         inputManager.OnEndTouch += (sender, args) =>
         {
