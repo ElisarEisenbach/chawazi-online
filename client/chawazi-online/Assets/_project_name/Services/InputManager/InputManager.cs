@@ -43,7 +43,6 @@ public class InputManager : MonoBehaviour
 
     private void TouchOnFingerMove(Finger finger)
     {
-        logger.Log("movving");
         OnMovingTouch?.Invoke(this, new TouchEventArgs(finger));
     }
 

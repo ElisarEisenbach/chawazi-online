@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,32 +8,50 @@ using Zenject;
 [CreateAssetMenu(fileName = "FingersList", menuName = "GameLogics", order = 0)]
 public class FingersListScriptableObject : ScriptableObject
 {
-    public List<int> Ids = new(); //just for debug
     public List<Finger> PlayingFingers = new();
+    public event Action<object, FingersCountChangeEventArgs> OnFingersCountChanged;
 
     [Inject]
     private void Construct(InputManager inputManager)
     {
-        inputManager.OnStartTouch += (sender, args) =>
-        {
-            PlayingFingers.Add(args.Finger);
-            Ids.Add(args.Finger.currentTouch.touchId);
-            //getIds();
-        };
-        inputManager.OnEndTouch += (sender, args) =>
-        {
-            var fingerToRemove =
-                PlayingFingers.FirstOrDefault(f => f.currentTouch.touchId == args.Finger.currentTouch.touchId);
-            if (fingerToRemove != null) PlayingFingers.Remove(fingerToRemove);
-
-            var idsToRemove =
-                Ids.FirstOrDefault(f => f == args.Finger.currentTouch.touchId);
-            if (idsToRemove != null) Ids.Remove(idsToRemove);
-        };
+        inputManager.OnStartTouch += InputManager_OnOnStartTouch;
+        inputManager.OnEndTouch += InputManager_OnOnEndTouch;
     }
 
-    private void getIds()
+    private void InputManager_OnOnEndTouch(object sender, TouchEventArgs args)
     {
-        foreach (var id in Ids) Debug.Log("id " + id);
+        var fingerToRemove =
+            PlayingFingers.FirstOrDefault(f => f.currentTouch.touchId == args.Finger.currentTouch.touchId);
+        if (fingerToRemove != null) PlayingFingers.Remove(fingerToRemove);
+        OnFingersCountChanged?.Invoke(this,
+            new FingersCountChangeEventArgs(PlayingFingers.Count, args.Finger.currentTouch.touchId,
+                ChangeType.Removed));
     }
+
+    private void InputManager_OnOnStartTouch(object sender, TouchEventArgs args)
+    {
+        PlayingFingers.Add(args.Finger);
+        OnFingersCountChanged?.Invoke(this,
+            new FingersCountChangeEventArgs(PlayingFingers.Count, args.Finger.currentTouch.touchId, ChangeType.Added));
+    }
+}
+
+public class FingersCountChangeEventArgs : EventArgs
+{
+    public readonly int fingersCount;
+    public readonly int id;
+    public ChangeType ChangeType;
+
+    public FingersCountChangeEventArgs(int fingersCount, int id, ChangeType changeType)
+    {
+        ChangeType = changeType;
+        this.fingersCount = fingersCount;
+        this.id = id;
+    }
+}
+
+public enum ChangeType
+{
+    Added,
+    Removed
 }
