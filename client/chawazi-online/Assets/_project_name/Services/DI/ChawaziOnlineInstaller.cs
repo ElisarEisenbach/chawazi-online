@@ -5,6 +5,7 @@ using Zenject;
 public class ChawaziOnlineInstaller : MonoInstaller
 {
     [SerializeField] private GameObject CirclePrefab;
+    [SerializeField] private GameObject GamePanel;
 
     [SerializeField] private SettingsScriptableObject settingsScriptableObject;
 
@@ -21,5 +22,6 @@ public class ChawaziOnlineInstaller : MonoInstaller
         Container.Bind<CircleSpawner>().AsSingle().NonLazy();
         Container.BindFactory<Circle, CircleFactory>().FromComponentInNewPrefab(CirclePrefab);
         Container.Bind<ILogger>().FromInstance(Debug.unityLogger);
+        //Container.Bind<GameObject>().FromInstance(GamePanel).AsSingle();
     }
 }
