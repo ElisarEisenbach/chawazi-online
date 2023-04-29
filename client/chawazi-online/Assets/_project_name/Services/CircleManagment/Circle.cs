@@ -36,7 +36,6 @@ public class Circle : MonoBehaviour
         if (touchId != args.winningFinger.currentTouch.touchId)
         {
             animator.SetBool("IsLooser", true);
-            //this.DestroyCircle();
         }
         else
         {
@@ -45,14 +44,9 @@ public class Circle : MonoBehaviour
         }
     }
 
-    public void OnAnimationEnd(string winner)
+    public void OnAnimationEnd()
     {
-        var animator = gameObject.GetComponent<Animator>();
-        var isLooser = animator.GetBool("IsLooser");
-        var isWinner = animator.GetBool("IsWinner");
-        if (isLooser)
-            this.DestroyCircle();
-        else if (isWinner) logger.Log("Winner!");
+        this.DestroyCircle();
     }
 
 
