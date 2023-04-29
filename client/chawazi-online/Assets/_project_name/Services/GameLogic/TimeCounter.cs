@@ -28,7 +28,7 @@ namespace _project_name.Services.GameLogic
 
         private void Update()
         {
-            if (fingersCount >= 1 && !waitingForRemovingFinger)
+            if (fingersCount > 1 && !waitingForRemovingFinger)
                 if (Time.time - lastEventTime > 3f)
                 {
                     logger.Log("Time's up! from update!");
