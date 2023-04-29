@@ -31,17 +31,28 @@ public class Circle : MonoBehaviour
 
     private void ChooseWinner_OnWinnerHasBeenChoosen(object sender, WinnerEventArgs args)
     {
+        var animator = gameObject.GetComponent<Animator>();
         // todo: add animations
         if (touchId != args.winningFinger.currentTouch.touchId)
         {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
-            logger.Log("looser!");
+            animator.SetBool("IsLooser", true);
+            //this.DestroyCircle();
         }
         else
         {
+            animator.SetBool("IsWinner", true);
             logger.Log("Winner!");
         }
+    }
+
+    public void OnAnimationEnd(string winner)
+    {
+        var animator = gameObject.GetComponent<Animator>();
+        var isLooser = animator.GetBool("IsLooser");
+        var isWinner = animator.GetBool("IsWinner");
+        if (isLooser)
+            this.DestroyCircle();
+        else if (isWinner) logger.Log("Winner!");
     }
 
 

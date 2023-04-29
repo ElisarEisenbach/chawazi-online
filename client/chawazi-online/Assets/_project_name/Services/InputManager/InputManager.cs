@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Zenject;
@@ -43,18 +44,28 @@ public class InputManager : MonoBehaviour
 
     private void TouchOnFingerMove(Finger finger)
     {
-        logger.Log("movving");
+#if UNITY_EDITOR
+        if (!EditorApplication.isPaused) OnMovingTouch?.Invoke(this, new TouchEventArgs(finger));
+#else
         OnMovingTouch?.Invoke(this, new TouchEventArgs(finger));
+#endif
     }
 
     private void TouchOnFingerUp(Finger finger)
     {
+#if UNITY_EDITOR
+        if (!EditorApplication.isPaused) OnEndTouch?.Invoke(this, new TouchEventArgs(finger));
+#else
         OnEndTouch?.Invoke(this, new TouchEventArgs(finger));
+#endif
     }
 
     private void TouchOnFingerDown(Finger finger)
     {
-        //Instantiate(cube);//factory
+#if UNITY_EDITOR
+        if (!EditorApplication.isPaused) OnStartTouch?.Invoke(this, new TouchEventArgs(finger));
+#else
         OnStartTouch?.Invoke(this, new TouchEventArgs(finger));
+#endif
     }
 }

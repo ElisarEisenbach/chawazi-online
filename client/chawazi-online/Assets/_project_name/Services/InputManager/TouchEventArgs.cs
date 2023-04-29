@@ -4,9 +4,8 @@ using UnityEngine.InputSystem.EnhancedTouch;
 
 public class TouchEventArgs : EventArgs
 {
-    public Finger Finger;
-
     private readonly Vector2 position;
+    public Finger Finger;
     private float time;
 
     public TouchEventArgs(Finger finger)
@@ -18,7 +17,7 @@ public class TouchEventArgs : EventArgs
 
     public Vector3 GetScreenCoordinates()
     {
-        return new(position.x, position.y, Camera.main.nearClipPlane);
+        return new Vector3(position.x, position.y, Camera.main.nearClipPlane);
     }
 
     public Vector3 GetWorldCoordinates()

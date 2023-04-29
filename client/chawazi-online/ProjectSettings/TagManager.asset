@@ -44,3 +44,6 @@ TagManager:
   - name: Trash
     uniqueID: 2727232013
     locked: 0
+  - name: Circles
+    uniqueID: 1645585293
+    locked: 0

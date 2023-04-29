@@ -5,10 +5,9 @@ public class FireBaseAnalytics : IAnalytics
 {
     private readonly ILogger logger;
 
-    public FireBaseAnalytics(ILogger logger, AnalyticsScriptableObject analyticsScriptableObject)
+    public FireBaseAnalytics(ILogger logger)
     {
         this.logger = logger;
-        if (analyticsScriptableObject.isEnabled) InitializeAnalytics();
     }
 
 
