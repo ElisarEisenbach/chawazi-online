@@ -23,7 +23,7 @@ namespace _project_name.Services.GameLogic
         {
             // Listen for the TouchEvent and reset the count
             inputManager.OnStartTouch += OnNeedToCancelTimer;
-            inputManager.OnMovingTouch += OnNeedToCancelTimer;
+            //inputManager.OnMovingTouch += OnNeedToCancelTimer;
         }
 
         private void Update()
@@ -47,7 +47,7 @@ namespace _project_name.Services.GameLogic
         {
             // Unsubscribe from the TouchEvent
             inputManager.OnStartTouch -= OnNeedToCancelTimer;
-            inputManager.OnMovingTouch -= OnNeedToCancelTimer;
+            //inputManager.OnMovingTouch -= OnNeedToCancelTimer;
             CancelTimer();
         }
 
